@@ -1,8 +1,0 @@
-﻿<Window x:Class="ImplAuditTrailUsingEFPart1.Window1"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="Window1" Height="142" Width="381">
-    <Grid>
-        <Button Margin="62,32,50,33" Name="button1" Click="button1_Click">Do Audit</Button>
-    </Grid>
-</Window>
