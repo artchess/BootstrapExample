@@ -1,0 +1,25 @@
+﻿@model BootstrapExample.Models.Persona
+@{
+    ViewBag.Title = "Advanced";
+}
+
+<h2>Hola <span data-bind="text: getName()"></span></h2>
+
+@section Scripts{
+    <script>
+
+        function ViewModel(primerNombre, segundoNombre) {
+            var self = this;
+
+            self.name = primerNombre + ' ' + segundoNombre;
+            self.getName = function () {
+                return self.name;
+            }
+        }
+
+        var viewModel = new ViewModel('@Model.PrimerNombre', '@Model.SegundoNombre');
+        ko.applyBindings(viewModel);
+
+    </script>    
+}
+

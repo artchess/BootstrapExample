@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BootstrapExample.DAL;
+using BootstrapExample.Models;
 
 namespace BootstrapExample.Controllers
 {
@@ -10,6 +12,12 @@ namespace BootstrapExample.Controllers
     {
         public ActionResult Index()
         {
+            LibreriaContext context = new LibreriaContext();
+
+            var libros = context.Libros.ToList();
+
+            context.Dispose();
+
             return View();
         }
 
@@ -25,6 +33,22 @@ namespace BootstrapExample.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult Basic()
+        {
+            return View();
+        }
+
+        public ActionResult Advanced()
+        {
+            Persona persona = new Persona()
+            {
+                PrimerNombre = "Arturo",
+                SegundoNombre = "Ferreiro"
+            };
+
+            return View(persona);
         }
     }
 }

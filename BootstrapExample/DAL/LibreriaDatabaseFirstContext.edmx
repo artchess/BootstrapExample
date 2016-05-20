@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BootstrapExample2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Autor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PrimerNombre" Type="nvarchar" MaxLength="200" />
+          <Property Name="SegundoNombre" Type="nvarchar" MaxLength="200" />
+          <Property Name="Biografia" Type="nvarchar" MaxLength="2000" />
+        </EntityType>
+        <EntityType Name="Libro">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AutorId" Type="int" Nullable="false" />
+          <Property Name="Titulo" Type="nvarchar" MaxLength="200" />
+          <Property Name="Isbn" Type="nvarchar" MaxLength="200" />
+          <Property Name="Sinopsis" Type="nvarchar" MaxLength="200" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="2000" />
+          <Property Name="UrlImagen" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <Association Name="FK_Libro_Autor">
+          <End Role="Autor" Type="Self.Autor" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Libro" Type="Self.Libro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Autor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Libro">
+              <PropertyRef Name="AutorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BootstrapExample2ModelStoreContainer">
+          <EntitySet Name="Autor" EntityType="Self.Autor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Libro" EntityType="Self.Libro" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Libro_Autor" Association="Self.FK_Libro_Autor">
+            <End Role="Autor" EntitySet="Autor" />
+            <End Role="Libro" EntitySet="Libro" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BootstrapExample2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Autor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PrimerNombre" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SegundoNombre" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Biografia" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Libro" Relationship="Self.FK_Libro_Autor" FromRole="Autor" ToRole="Libro" />
+        </EntityType>
+        <EntityType Name="Libro">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AutorId" Type="Int32" Nullable="false" />
+          <Property Name="Titulo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Isbn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Sinopsis" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="UrlImagen" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Autor" Relationship="Self.FK_Libro_Autor" FromRole="Libro" ToRole="Autor" />
+        </EntityType>
+        <Association Name="FK_Libro_Autor">
+          <End Role="Autor" Type="Self.Autor" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Libro" Type="Self.Libro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Autor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Libro">
+              <PropertyRef Name="AutorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BootstrapExample2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Autor" EntityType="Self.Autor" />
+          <EntitySet Name="Libro" EntityType="Self.Libro" />
+          <AssociationSet Name="FK_Libro_Autor" Association="Self.FK_Libro_Autor">
+            <End Role="Autor" EntitySet="Autor" />
+            <End Role="Libro" EntitySet="Libro" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BootstrapExample2ModelStoreContainer" CdmEntityContainer="BootstrapExample2Entities">
+          <EntitySetMapping Name="Autor">
+            <EntityTypeMapping TypeName="BootstrapExample2Model.Autor">
+              <MappingFragment StoreEntitySet="Autor">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PrimerNombre" ColumnName="PrimerNombre" />
+                <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+                <ScalarProperty Name="Biografia" ColumnName="Biografia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Libro">
+            <EntityTypeMapping TypeName="BootstrapExample2Model.Libro">
+              <MappingFragment StoreEntitySet="Libro">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AutorId" ColumnName="AutorId" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Isbn" ColumnName="Isbn" />
+                <ScalarProperty Name="Sinopsis" ColumnName="Sinopsis" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="UrlImagen" ColumnName="UrlImagen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
