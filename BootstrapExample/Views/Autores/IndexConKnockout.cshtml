@@ -1,0 +1,49 @@
+﻿@model IEnumerable<BootstrapExample.Models.Autor>
+
+@{
+    ViewBag.Title = "Autores";
+}
+
+<h2>Autores</h2>
+
+<p>
+    @Html.ActionLink("Crear Nuevo", "Create")
+</p>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PrimerNombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SegundoNombre)
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: autores">
+        <tr>
+            <td data-bind="text: PrimerNombre">
+            </td>
+            <td data-bind="text: SegundoNombre">
+            </td>
+            <td>
+                <a data-bind="attr: { href: '@Url.Action("Details")/' + Id }" class="btn btn-info">Detalles</a>
+                <a data-bind="attr: { href: '@Url.Action("Edit")/' + Id }" class="btn btn-primary">Editar</a>
+                <a data-bind="attr: { href: '@Url.Action("Delete")/' + Id }" class="btn btn-danger">Eliminar</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+@section Scripts{
+    <script>
+        function ViewModel(autores) {
+            var self = this;
+            self.autores = autores;
+        };
+
+        var viewModel = new ViewModel(@Html.HtmlConvertToJson(Model));
+        ko.applyBindings(viewModel);
+    </script>    
+}

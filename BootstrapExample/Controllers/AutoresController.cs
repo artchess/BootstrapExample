@@ -27,7 +27,7 @@ namespace BootstrapExample.Controllers
 
             var libros = autor.First().Libros;
 
-            return View(db.Autor.ToList());
+            return View("IndexConKnockout", db.Autor.ToList());
         }
 
         // GET: Autores/Details/5
