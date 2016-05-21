@@ -15,6 +15,11 @@ namespace BootstrapExample.DAL
 
         }
 
+        //static LibreriaContext()
+        //{
+        //    Database.SetInitializer(new LibreriaDBInicializador());
+        //}
+
         public DbSet<Libro> Libros { get; set; } // un DbSet esta relacionado a una tabla en la base de datos, un modelo representa un registro de la tabla.
         public DbSet<Autor> Autor { get; set; }
 

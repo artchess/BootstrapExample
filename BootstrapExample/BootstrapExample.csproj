@@ -120,28 +120,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AutoresController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="DAL\Autor.cs">
-      <DependentUpon>LibreriaDatabaseFirstContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="DAL\LibreriaContext.cs" />
-    <Compile Include="DAL\LibreriaDatabaseFirstContext.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LibreriaDatabaseFirstContext.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\LibreriaDatabaseFirstContext.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LibreriaDatabaseFirstContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\LibreriaDatabaseFirstContext.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LibreriaDatabaseFirstContext.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Libro.cs">
-      <DependentUpon>LibreriaDatabaseFirstContext.tt</DependentUpon>
+    <Compile Include="DAL\LibreriaDBInicializador.cs">
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -158,16 +143,6 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="DAL\LibreriaDatabaseFirstContext.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>LibreriaDatabaseFirstContext.edmx</DependentUpon>
-      <LastGenOutput>LibreriaDatabaseFirstContext.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="DAL\LibreriaDatabaseFirstContext.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>LibreriaDatabaseFirstContext.edmx</DependentUpon>
-      <LastGenOutput>LibreriaDatabaseFirstContext.cs</LastGenOutput>
-    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -182,13 +157,6 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
-    <EntityDeploy Include="DAL\LibreriaDatabaseFirstContext.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>LibreriaDatabaseFirstContext.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="DAL\LibreriaDatabaseFirstContext.edmx.diagram">
-      <DependentUpon>LibreriaDatabaseFirstContext.edmx</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.2.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.2.3.js" />
@@ -209,7 +177,9 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="sqlscripts\libreriadb.sql" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -225,6 +195,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Basic.cshtml" />
     <Content Include="Views\Home\Advanced.cshtml" />
+    <Content Include="Views\Autores\Create.cshtml" />
+    <Content Include="Views\Autores\Delete.cshtml" />
+    <Content Include="Views\Autores\Details.cshtml" />
+    <Content Include="Views\Autores\Edit.cshtml" />
+    <Content Include="Views\Autores\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
