@@ -21,11 +21,11 @@ namespace BootstrapExample.Controllers
         {
             // al acceso al DbSet Autor le sigue la funcion ToList, este es un importante concepto al momento de trabajar con entity framework. Cuando estamos interactuando con un DbSet, EF no executa ningun query a la base de datos hasta que los datos son accesados en el código. Al momento en que llamo a ToList, esto le dice a EF que execute un query y llene la lista de autores en una lista. Si pusieramos un Where por ejemplo, antes del ToList lo que va a hacer EF es modificar el query que va a ejecutar al llamar a ToList. Una vez que los datos han sido obtenidos de la base de datos, cualquier manipulación  posterior al resultado se hará estrictamente en el objeto en la memoria y no contra la base de datos. (solamente si esta habilitado lazy loading y accedemos a propiedades de navegación, se ejecutará un query contra la base de datos para traer lo que solicitamos)     
 
-            var autor = db.Autor.Where(a => a.Id == 1).Where(a => a.PrimerNombre == "Jamie").ToList();
+            //var autor = db.Autor.Where(a => a.Id == 1).Where(a => a.PrimerNombre == "Jamie").ToList();
 
-            var prueba = "";
+            //var prueba = "";
 
-            var libros = autor.First().Libros;
+            //var libros = autor.First().Libros;
 
             return View("IndexConKnockout", db.Autor.ToList());
         }
