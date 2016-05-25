@@ -141,6 +141,7 @@
     <Compile Include="Models\Persona.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\QueryOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -180,6 +181,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\ViewModels\AutorFormViewModel.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="sqlscripts\libreriadb.sql" />
     <Content Include="Web.config">

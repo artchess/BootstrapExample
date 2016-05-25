@@ -1,7 +1,9 @@
 ﻿@model IEnumerable<BootstrapExample.Models.Autor>
+@using BootstrapExample.Models
 
 @{
     ViewBag.Title = "Autores";
+    var queryOptions = (QueryOptions)ViewBag.QueryOptions;
 }
 
 <h2>Autores</h2>
@@ -13,10 +15,12 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.PrimerNombre)
+                @*@Html.DisplayNameFor(model => model.PrimerNombre)*@
+                @Html.BuildSortableLink("Primer Nombre", "Index", "PrimerNombre", queryOptions)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SegundoNombre)
+                @*@Html.DisplayNameFor(model => model.SegundoNombre)*@
+                @Html.BuildSortableLink("Segundo Nombre", "Index", "SegundoNombre", queryOptions)
             </th>
             <th>Acciones</th>
         </tr>
@@ -35,6 +39,7 @@
         </tr>
     </tbody>
 </table>
+@Html.BuildPaggingLinks(queryOptions, "Index")
 
 @section Scripts{
     <script>

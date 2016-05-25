@@ -19,6 +19,13 @@ namespace BootstrapExample.DAL
                 SegundoNombre = "Munro"
             };
 
+            var autor2 = new Autor
+            {
+                Biografia = "...",
+                PrimerNombre = "Mike",
+                SegundoNombre = "Wilson"
+            };
+
             var libros = new List<Libro>
             {
                 new Libro
@@ -61,6 +68,9 @@ namespace BootstrapExample.DAL
 
             // Si nos damos cuenta, no estamos agregando Autor en su DbSet solo los las instancias de Libro. Esta es la magia de EF. Automaticamente sabe que necesita crear el Autor antes de salvar el Libro porque el modelo de Libro fue inicializado con una referencia al Autor. Magia! :)
             libros.ForEach(b => context.Libros.Add(b));
+
+            context.Autor.Add(autor2);
+
             context.SaveChanges();
         }
     }
