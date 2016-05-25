@@ -1,12 +1,13 @@
 ﻿@model BootstrapExample.Models.Autor
 
 @{
-    ViewBag.Title = "Crear";
+    var isCreating = Model.Id == 0;
+    ViewBag.Title = (isCreating) ? "Crear" : "Editar";
 }
 
 <div data-bind="visible: !guardadoCompletado()">
 
-    <h2>Create</h2>
+    <h2>@ViewBag.Title</h2>
 
     @using (Html.BeginForm("Create", "Autores", FormMethod.Post, new { data_bind = "submit: validarYGuardar" }))
     {
@@ -42,7 +43,12 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10" data-bind="visible: !enviando()">
-                    <input type="submit" value="Crear" class="btn btn-default" />
+                    <input type="submit" value="@if (isCreating) { 
+                                                    @Html.Raw("Crear") 
+                                                } else { 
+                                                    @Html.Raw("Editar") 
+                                                }" 
+                           class="btn btn-default" />
                 </div>
 
                 <div class="progress" data-bind="visible: enviando">
@@ -63,7 +69,7 @@
 @section Scripts{
     @Scripts.Render("~/bundles/jqueryval", "/Scripts/ViewModels/AutorFormViewModel.js")
     <script>
-        var viewModel = new AutorFormViewModel();
+        var viewModel = new AutorFormViewModel(@Html.HtmlConvertToJson(Model));
         ko.applyBindings(viewModel);
     </script>
 }

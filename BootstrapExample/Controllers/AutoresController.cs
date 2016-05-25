@@ -60,7 +60,7 @@ namespace BootstrapExample.Controllers
         // GET: Autores/Create
         public ActionResult Create()
         {
-            return View();
+            return View("Form", new Autor());
         }
 
         // POST: Autores/Create
@@ -92,7 +92,7 @@ namespace BootstrapExample.Controllers
             {
                 return HttpNotFound();
             }
-            return View(autor);
+            return View("Form", autor);
         }
 
         // POST: Autores/Edit/5

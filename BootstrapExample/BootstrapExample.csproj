@@ -202,7 +202,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Basic.cshtml" />
     <Content Include="Views\Home\Advanced.cshtml" />
-    <Content Include="Views\Autores\Create.cshtml" />
+    <Content Include="Views\Autores\Form.cshtml" />
     <Content Include="Views\Autores\Delete.cshtml" />
     <Content Include="Views\Autores\Details.cshtml" />
     <Content Include="Views\Autores\Edit.cshtml" />

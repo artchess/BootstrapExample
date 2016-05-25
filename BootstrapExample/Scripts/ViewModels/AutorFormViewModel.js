@@ -1,15 +1,18 @@
 ﻿
-function AutorFormViewModel() {
+function AutorFormViewModel(autor) {
     var self = this;
 
     // una variable observable detecta cambios en la variable. Esto hace el doble binding entre la vista y mi ViewModel
     self.guardadoCompletado = ko.observable(false);
     self.enviando = ko.observable(false);
 
+    self.isCreating = autor.id == 0;
+
     self.autor = {
-        primerNombre: ko.observable(),
-        segundoNombre: ko.observable(),
-        biografia: ko.observable()
+        id: autor.id,
+        primerNombre: ko.observable(autor.primerNombre),
+        segundoNombre: ko.observable(autor.segundoNombre),
+        biografia: ko.observable(autor.biografia)
     };
 
     self.validarYGuardar = function (form) {
@@ -22,7 +25,7 @@ function AutorFormViewModel() {
         self.autor.__RequestVerificationToken = form[0].value;
 
         $.ajax({
-            url: 'Create',
+            url: (self.isCreating) ? 'Create' : 'Edit',
             type: 'post',
             contentType: 'application/x-www-form-urlencoded',
             data: ko.toJS(self.autor)
@@ -37,11 +40,14 @@ function AutorFormViewModel() {
 
         $('.body-content').prepend(
             '<div class="alert alert-success">' +
-                '<strong>¡Guardado!</strong> El nuevo autor ha sido guardado.' +
+                '<strong>¡Guardado!</strong> El autor ha sido guardado.' +
             '</div>');
 
         setTimeout(function () {
-            location.href = "./";
+            if (self.isCreating)
+                location.href = "./";
+            else
+                location.href = "../";
         }, 2000);
     };
 
