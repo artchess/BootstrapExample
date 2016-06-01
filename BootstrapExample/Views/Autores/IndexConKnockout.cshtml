@@ -1,5 +1,5 @@
-﻿@model IEnumerable<BootstrapExample.Models.Autor>
-@using BootstrapExample.Models
+﻿@using BootstrapExample.ViewModels
+@model IEnumerable<AutorViewModel>
 
 @{
     ViewBag.Title = "Autores";
@@ -11,35 +11,44 @@
 <p>
     @Html.ActionLink("Crear Nuevo", "Create")
 </p>
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>
-                @*@Html.DisplayNameFor(model => model.PrimerNombre)*@
-                @Html.BuildSortableLink("Primer Nombre", "Index", "primerNombre", queryOptions)
-            </th>
-            <th>
-                @*@Html.DisplayNameFor(model => model.SegundoNombre)*@
-                @Html.BuildSortableLink("Segundo Nombre", "Index", "segundoNombre", queryOptions)
-            </th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody data-bind="foreach: autores">
-        <tr>
-            <td data-bind="text: primerNombre">
-            </td>
-            <td data-bind="text: segundoNombre">
-            </td>
-            <td>
-                <a data-bind="attr: { href: '@Url.Action("Details")/' + id }" class="btn btn-info">Detalles</a>
-                <a data-bind="attr: { href: '@Url.Action("Edit")/' + id }" class="btn btn-primary">Editar</a>
-                <a data-bind="click: $parent.muestraModalEliminacion, attr: { href: '@Url.Action("Delete")/' + id }" class="btn btn-danger">Eliminar</a>
-            </td>
-        </tr>
-    </tbody>
-</table>
-@Html.BuildPaggingLinks(queryOptions, "Index")
+
+<div style="display:none" data-bind="visible: autores.length > 0">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.PrimerNombre)*@
+                    @Html.BuildSortableLink("Primer Nombre", "Index", "primerNombre", queryOptions)
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.SegundoNombre)*@
+                    @Html.BuildSortableLink("Segundo Nombre", "Index", "segundoNombre", queryOptions)
+                </th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: autores">
+            <tr>
+                <td data-bind="text: primerNombre"></td>
+                <td data-bind="text: segundoNombre"></td>
+                <td>
+                    <a data-bind="attr: { href: '@Url.Action("Details")/' + id }" class="btn btn-info">Detalles</a>
+                    <a data-bind="attr: { href: '@Url.Action("Edit")/' + id }" class="btn btn-primary">Editar</a>
+                    <a data-bind="click: $parent.muestraModalEliminacion, attr: { href: '@Url.Action("Delete")/' + id }" class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    @Html.BuildPaggingLinks(queryOptions, "Index")
+</div>
+
+<div style="display:none" data-bind="visible: autores.length == 0" class="alert alert-warning alert-dismissible" role="alert">
+    <button type="button" class="close" data-dissmiss="alert">
+        <span aria-hidden="true">&times;</span>
+        <span class="sr-only">Cerrar</span>
+    </button>
+    No hay autores. Haz click @Html.ActionLink("aquí", "Create") para crear uno nuevo.
+</div>
 
 @section Scripts{
     @Scripts.Render("/Scripts/ViewModels/AutorIndexViewModel.js")

@@ -15,7 +15,6 @@ function AutorIndexViewModel(autores) {
     };
 
     self.eliminaAutor = function (form) {
-        debugger;
         self.enviando(true);
         return true;
     };

@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using BootstrapExample.DAL;
 using BootstrapExample.Models;
 using System.Linq.Dynamic;
+using BootstrapExample.ViewModels;
 
 namespace BootstrapExample.Controllers
 {
@@ -39,7 +40,9 @@ namespace BootstrapExample.Controllers
 
             ViewBag.QueryOptions = queryOptions; // lo regresamos a la Vista
 
-            return View("IndexConKnockout", autores.ToList());
+            AutoMapper.Mapper.CreateMap<Autor, AutorViewModel>();
+
+            return View("IndexConKnockout", AutoMapper.Mapper.Map<List<AutorViewModel>>(autores.ToList()));
         }
 
         // GET: Autores/Details/5

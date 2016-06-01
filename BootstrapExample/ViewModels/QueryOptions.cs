@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace BootstrapExample.Models
+namespace BootstrapExample.ViewModels
 {
     public class QueryOptions
     {
@@ -10,7 +10,7 @@ namespace BootstrapExample.Models
             PageSize = 1;
 
             SortField = "Id";
-            SortOrder = Models.SortOrder.ASC.ToString();
+            SortOrder = ViewModels.SortOrder.ASC.ToString();
         }
 
         [JsonProperty(PropertyName="currentPage")]

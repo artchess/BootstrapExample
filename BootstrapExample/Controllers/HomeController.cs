@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using BootstrapExample.DAL;
 using BootstrapExample.Models;
+using BootstrapExample.ViewModels;
 
 namespace BootstrapExample.Controllers
 {
