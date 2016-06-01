@@ -48,8 +48,8 @@
                 </div>
             </div><!-- / .modal.body -->
             <div class="modal-footer">
-
-                @using (Html.BeginForm("Delete", "Autores", FormMethod.Post, new { data_bind = "submit: eliminaAutor" }))
+                <!-- Muy curioso si no le pongo a mi formulario new { Id = Model.Id } como route values, aun asi me hace el post correctamente -->
+                @using (Html.BeginForm("Delete", "Autores", new { Id = Model.Id }, FormMethod.Post, new { data_bind = "submit: eliminaAutor" }))
                 {
                     @Html.AntiForgeryToken()
 
