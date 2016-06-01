@@ -31,7 +31,7 @@ public static class HtmlHelperExtensions
             urlHelper.Action(actionName, new
             {
                 SortField = sortField,
-                SortOrder = (isCurrentSortField && queryOptions.SortOrder == SortOrder.ASC) ? SortOrder.DESC : SortOrder.ASC
+                SortOrder = (isCurrentSortField && queryOptions.SortOrder == SortOrder.ASC.ToString()) ? SortOrder.DESC : SortOrder.ASC
             }),
             fieldName,
             BuildSortIcon(isCurrentSortField, queryOptions)));
@@ -44,7 +44,7 @@ public static class HtmlHelperExtensions
         if(isCurrentSortField)
         {
             sortIcon += "-by-alphabet";
-            if (queryOptions.SortOrder == SortOrder.DESC)
+            if (queryOptions.SortOrder == SortOrder.DESC.ToString())
                 sortIcon += "-alt";
         }
 
