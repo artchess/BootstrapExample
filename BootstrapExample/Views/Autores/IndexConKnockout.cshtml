@@ -34,7 +34,7 @@
             <td>
                 <a data-bind="attr: { href: '@Url.Action("Details")/' + id }" class="btn btn-info">Detalles</a>
                 <a data-bind="attr: { href: '@Url.Action("Edit")/' + id }" class="btn btn-primary">Editar</a>
-                <a data-bind="attr: { href: '@Url.Action("Delete")/' + id }" class="btn btn-danger">Eliminar</a>
+                <a data-bind="click: $parent.muestraModalEliminacion, attr: { href: '@Url.Action("Delete")/' + id }" class="btn btn-danger">Eliminar</a>
             </td>
         </tr>
     </tbody>
@@ -42,13 +42,9 @@
 @Html.BuildPaggingLinks(queryOptions, "Index")
 
 @section Scripts{
+    @Scripts.Render("/Scripts/ViewModels/AutorIndexViewModel.js")
     <script>
-        function ViewModel(autores) {
-            var self = this;
-            self.autores = autores;
-        };
-
-        var viewModel = new ViewModel(@Html.HtmlConvertToJson(Model));
+        var viewModel = new AutorIndexViewModel(@Html.HtmlConvertToJson(Model));
         ko.applyBindings(viewModel);
     </script>    
 }
