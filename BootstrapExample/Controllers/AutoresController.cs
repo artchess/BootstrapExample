@@ -63,7 +63,7 @@ namespace BootstrapExample.Controllers
         // GET: Autores/Create
         public ActionResult Create()
         {
-            return View("Form", new Autor());
+            return View("Form", new AutorViewModel());
         }
 
         // POST: Autores/Create
@@ -71,11 +71,13 @@ namespace BootstrapExample.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,PrimerNombre,SegundoNombre,Biografia")] Autor autor)
+        public ActionResult Create([Bind(Include = "Id,PrimerNombre,SegundoNombre,Biografia")] AutorViewModel autor)
         {
             if (ModelState.IsValid)
             {
-                db.Autor.Add(autor);
+                AutoMapper.Mapper.CreateMap<AutorViewModel, Autor>();
+
+                db.Autor.Add(AutoMapper.Mapper.Map<Autor>(autor));
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -95,7 +97,9 @@ namespace BootstrapExample.Controllers
             {
                 return HttpNotFound();
             }
-            return View("Form", autor);
+
+            AutoMapper.Mapper.CreateMap<Autor, AutorViewModel>();
+            return View("Form", AutoMapper.Mapper.Map<AutorViewModel>(autor));
         }
 
         // POST: Autores/Edit/5
@@ -103,15 +107,16 @@ namespace BootstrapExample.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,PrimerNombre,SegundoNombre,Biografia")] Autor autor)
+        public ActionResult Edit([Bind(Include = "Id,PrimerNombre,SegundoNombre,Biografia")] AutorViewModel autor)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(autor).State = EntityState.Modified;
+                AutoMapper.Mapper.CreateMap<AutorViewModel, Autor>();
+                db.Entry(AutoMapper.Mapper.Map<Autor>(autor)).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(autor);
+            return View("Form", autor);
         }
 
         // GET: Autores/Delete/5
@@ -126,7 +131,9 @@ namespace BootstrapExample.Controllers
             {
                 return HttpNotFound();
             }
-            return View(autor);
+
+            AutoMapper.Mapper.CreateMap<Autor, AutorViewModel>();
+            return View(AutoMapper.Mapper.Map<AutorViewModel>(autor));
         }
 
         // POST: Autores/Delete/5
