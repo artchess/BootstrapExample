@@ -1,7 +1,8 @@
 ﻿
-function AutorIndexViewModel(autores) {
+function AutorIndexViewModel(resultList) {
     var self = this;
-    self.autores = autores;
+    //self.autores = autores;
+    self.pagingService = new PagingService(resultList);
 
     self.muestraModalEliminacion = function (data, event) { // data contiene el autor, event contiene el elemento html al que el evento click es atachado
         self.enviando = ko.observable(false);

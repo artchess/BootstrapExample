@@ -20,24 +20,24 @@ namespace BootstrapExample.Controllers.api
         private LibreriaContext db = new LibreriaContext();
 
         //GET: api/Autores
-        //public ResultList<AutorViewModel> Get([FromUri]QueryOptions queryOptions)
-        //{
-        //    var start = (queryOptions.CurrentPage - 1) * queryOptions.PageSize;
+        public ResultList<AutorViewModel> Get([FromUri]QueryOptions queryOptions)
+        {
+            var start = (queryOptions.CurrentPage - 1) * queryOptions.PageSize;
 
-        //    var autores = db.Autor.OrderBy(queryOptions.Sort) // aqui uso LINQ Dynamic
-        //                        .Skip(start)
-        //                        .Take(queryOptions.PageSize);
+            var autores = db.Autor.OrderBy(queryOptions.Sort) // aqui uso LINQ Dynamic
+                                .Skip(start)
+                                .Take(queryOptions.PageSize);
 
-        //    queryOptions.TotalPages = (int)Math.Ceiling((double)db.Autor.Count() / queryOptions.PageSize);
+            queryOptions.TotalPages = (int)Math.Ceiling((double)db.Autor.Count() / queryOptions.PageSize);
 
-        //    AutoMapper.Mapper.CreateMap<Autor, AutorViewModel>();
+            AutoMapper.Mapper.CreateMap<Autor, AutorViewModel>();
 
-        //    return new ResultList<AutorViewModel>
-        //    { 
-        //        QueryOptions = queryOptions,
-        //        Results = AutoMapper.Mapper.Map<List<AutorViewModel>>(autores.ToList())
-        //    }
-        //}
+            return new ResultList<AutorViewModel>
+            {
+                QueryOptions = queryOptions,
+                Results = AutoMapper.Mapper.Map<List<AutorViewModel>>(autores.ToList())
+            };
+        }
 
         protected override void Dispose(bool disposing)
         {

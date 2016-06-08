@@ -38,11 +38,14 @@ namespace BootstrapExample.Controllers
 
             queryOptions.TotalPages = (int)Math.Ceiling((double)db.Autor.Count() / queryOptions.PageSize);
 
-            ViewBag.QueryOptions = queryOptions; // lo regresamos a la Vista
+            //ViewBag.QueryOptions = queryOptions; // lo regresamos a la Vista
 
             AutoMapper.Mapper.CreateMap<Autor, AutorViewModel>();
 
-            return View("IndexConKnockout", AutoMapper.Mapper.Map<List<AutorViewModel>>(autores.ToList()));
+            return View("IndexConKnockout", new ResultList<AutorViewModel>{
+                QueryOptions = queryOptions,
+                Results = AutoMapper.Mapper.Map<List<AutorViewModel>>(autores.ToList())
+            });
         }
 
         // GET: Autores/Details/5

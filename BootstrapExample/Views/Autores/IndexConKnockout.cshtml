@@ -1,9 +1,9 @@
 ﻿@using BootstrapExample.ViewModels
-@model IEnumerable<AutorViewModel>
+@model ResultList<AutorViewModel>
 
 @{
     ViewBag.Title = "Autores";
-    var queryOptions = (QueryOptions)ViewBag.QueryOptions;
+    var queryOptions = Model.QueryOptions; //(QueryOptions)ViewBag.QueryOptions;
 }
 
 <h2>Autores</h2>
@@ -12,22 +12,22 @@
     @Html.ActionLink("Crear Nuevo", "Create")
 </p>
 
-<div style="display:none" data-bind="visible: autores.length > 0">
+<div style="display:none" data-bind="visible: pagingService.entities().length > 0">
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
                 <th>
                     @*@Html.DisplayNameFor(model => model.PrimerNombre)*@
-                    @Html.BuildSortableLink("Primer Nombre", "Index", "primerNombre", queryOptions)
+                    @Html.BuildKnockoutSortableLink("Primer Nombre", "Index", "primerNombre")
                 </th>
                 <th>
                     @*@Html.DisplayNameFor(model => model.SegundoNombre)*@
-                    @Html.BuildSortableLink("Segundo Nombre", "Index", "segundoNombre", queryOptions)
+                    @Html.BuildKnockoutSortableLink("Segundo Nombre", "Index", "segundoNombre")
                 </th>
                 <th>Acciones</th>
             </tr>
         </thead>
-        <tbody data-bind="foreach: autores">
+        <tbody data-bind="foreach: pagingService.entities">
             <tr>
                 <td data-bind="text: primerNombre"></td>
                 <td data-bind="text: segundoNombre"></td>
@@ -39,10 +39,10 @@
             </tr>
         </tbody>
     </table>
-    @Html.BuildPaggingLinks(queryOptions, "Index")
+    @Html.BuildKnockoutPaggingLinks("Index")
 </div>
 
-<div style="display:none" data-bind="visible: autores.length == 0" class="alert alert-warning alert-dismissible" role="alert">
+<div style="display:none" data-bind="visible: pagingService.entities().length == 0" class="alert alert-warning alert-dismissible" role="alert">
     <button type="button" class="close" data-dissmiss="alert">
         <span aria-hidden="true">&times;</span>
         <span class="sr-only">Cerrar</span>
@@ -51,7 +51,7 @@
 </div>
 
 @section Scripts{
-    @Scripts.Render("/Scripts/ViewModels/AutorIndexViewModel.js")
+    @Scripts.Render("/Scripts/Services/PagingService.js", "/Scripts/ViewModels/AutorIndexViewModel.js")
     <script>
         var viewModel = new AutorIndexViewModel(@Html.HtmlConvertToJson(Model));
         ko.applyBindings(viewModel);

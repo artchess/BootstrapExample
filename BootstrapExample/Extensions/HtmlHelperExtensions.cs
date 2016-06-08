@@ -38,6 +38,17 @@ public static class HtmlHelperExtensions
             BuildSortIcon(isCurrentSortField, queryOptions)));
     }
 
+    //version knokout del método anterior
+    public static MvcHtmlString BuildKnockoutSortableLink(this HtmlHelper htmlHelper, string fieldName, string actionName, string sortField)
+    {
+        var urlHelper = new UrlHelper(htmlHelper.ViewContext.RequestContext);
+
+        return new MvcHtmlString(string.Format("<a href=\"{0}\" data-bind=\"click: pagingService.sortEntitiesBy\" data-sort-field=\"{1}\">{2}<span data-bind=\"css: pagingService.buildSortIcon('{1}')\"></span></a>",
+            urlHelper.Action(actionName),
+            sortField,
+            fieldName));
+    }
+
     private static string BuildSortIcon(bool isCurrentSortField, QueryOptions queryOptions)
     {
         string sortIcon = "sort";
@@ -68,6 +79,26 @@ public static class HtmlHelperExtensions
             IsNextDisabled(queryOptions),
             BuildNextLink(urlHelper, queryOptions, actionName)
             ));  
+    }
+
+    //version knockout del metodo anterior
+    public static MvcHtmlString BuildKnockoutPaggingLinks(this HtmlHelper htmlHelper, string actionName)
+    {
+        var urlHelper = new UrlHelper(htmlHelper.ViewContext.RequestContext);
+        
+        return new MvcHtmlString(string.Format(
+            "<nav>" +
+            "   <ul class=\"pager\">" +
+            "       <li data-bind=\"css: pagingService.buildPreviousClass()\">" +
+            "           <a href=\"{0}\" data-bind=\"click: pagingService.previousPage\">Anterior</a>" +
+            "       </li>" +
+            "       <li data-bind=\"css: pagingService.buildNextClass()\">" +
+            "           <a href=\"{0}\" data-bind=\"click: pagingService.nextPage\">Siguiente</a>" +
+            "       </li>" +
+            "   </ul>" +
+            "</nav>",
+            @urlHelper.Action(actionName)
+            ));
     }
 
     private static string IsPreviousDisabled(QueryOptions queryOptions)
