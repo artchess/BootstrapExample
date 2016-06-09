@@ -72,21 +72,21 @@ namespace BootstrapExample.Controllers
         // POST: Autores/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,PrimerNombre,SegundoNombre,Biografia")] AutorViewModel autor)
-        {
-            if (ModelState.IsValid)
-            {
-                AutoMapper.Mapper.CreateMap<AutorViewModel, Autor>();
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "Id,PrimerNombre,SegundoNombre,Biografia")] AutorViewModel autor)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        AutoMapper.Mapper.CreateMap<AutorViewModel, Autor>();
 
-                db.Autor.Add(AutoMapper.Mapper.Map<Autor>(autor));
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //        db.Autor.Add(AutoMapper.Mapper.Map<Autor>(autor));
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-            return View(autor);
-        }
+        //    return View(autor);
+        //}
 
         // GET: Autores/Edit/5
         public ActionResult Edit(int? id)
@@ -108,19 +108,19 @@ namespace BootstrapExample.Controllers
         // POST: Autores/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,PrimerNombre,SegundoNombre,Biografia")] AutorViewModel autor)
-        {
-            if (ModelState.IsValid)
-            {
-                AutoMapper.Mapper.CreateMap<AutorViewModel, Autor>();
-                db.Entry(AutoMapper.Mapper.Map<Autor>(autor)).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View("Form", autor);
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "Id,PrimerNombre,SegundoNombre,Biografia")] AutorViewModel autor)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        AutoMapper.Mapper.CreateMap<AutorViewModel, Autor>();
+        //        db.Entry(AutoMapper.Mapper.Map<Autor>(autor)).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View("Form", autor);
+        //}
 
         // GET: Autores/Delete/5
         public ActionResult Delete(int? id)

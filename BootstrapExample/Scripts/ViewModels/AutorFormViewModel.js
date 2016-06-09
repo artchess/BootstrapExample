@@ -25,10 +25,10 @@ function AutorFormViewModel(autor) {
         self.autor.__RequestVerificationToken = form[0].value;
 
         $.ajax({
-            url: (self.isCreating) ? 'Create' : 'Edit',
-            type: 'post',
-            contentType: 'application/x-www-form-urlencoded',
-            data: ko.toJS(self.autor)
+            url: '/api/autores', //(self.isCreating) ? 'Create' : 'Edit',
+            type: (self.isCreating) ? 'post' : 'put', // 'post',
+            contentType: 'application/json', //'application/x-www-form-urlencoded',
+            data: ko.toJSON(self.autor) //ko.toJS(self.autor)
         })
         .success(self.guardadoSatisfactorio)
         .error(self.guardadoErroneo)
