@@ -58,7 +58,8 @@ namespace BootstrapExample.Controllers.api
             return new ResultList<AutorViewModel>(AutoMapper.Mapper.Map<List<Autor>, List<AutorViewModel>>(autores.ToList()), queryOptions);
         }
 
-        public AutorViewModel Get(int? id)
+        [ResponseType(typeof(AutorViewModel))]
+        public IHttpActionResult Get(int? id)
         {
             if(id == null)
             {
@@ -72,7 +73,7 @@ namespace BootstrapExample.Controllers.api
             }
 
             AutoMapper.Mapper.CreateMap<Autor, AutorViewModel>();
-            return autor;
+            return Ok(AutoMapper.Mapper.Map<AutorViewModel>(autor));
         }
 
         // PUT: api/autores
