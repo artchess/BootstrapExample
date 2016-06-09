@@ -32,11 +32,13 @@ namespace BootstrapExample.Controllers.api
 
             AutoMapper.Mapper.CreateMap<Autor, AutorViewModel>();
 
-            return new ResultList<AutorViewModel>
-            {
-                QueryOptions = queryOptions,
-                Results = AutoMapper.Mapper.Map<List<AutorViewModel>>(autores.ToList())
-            };
+            //return new ResultList<AutorViewModel>
+            //{
+            //    QueryOptions = queryOptions,
+            //    Results = AutoMapper.Mapper.Map<List<AutorViewModel>>(autores.ToList())
+            //};
+
+            return new ResultList<AutorViewModel>(AutoMapper.Mapper.Map<List<Autor>, List<AutorViewModel>>(autores.ToList()), queryOptions);
         }
 
         /*** HTTP Status Codes
