@@ -19,6 +19,23 @@ namespace BootstrapExample.Controllers.api
     {
         private LibreriaContext db = new LibreriaContext();
 
+
+        /*** HTTP Status Codes
+         * aplicaciones RESTful depende mucho de los HTTP Status Codes 
+         * para proveer el feedback del API request. Los tres principales niveles que son comunmente usados son:
+         * Successful 2xx
+         *      200 OK, 201 Created, 204 No Content. Cualquier respuesta 
+         *      con código 200s es usado para identificar que el API request fue correcto
+         * Client Error 400
+         *      400 Bad Request (los datos no son validos), 401 Unauthorized, 404 Not Found, 405 Method Not Allowed. 
+         *      Cualquier respuesta en 400s es usada para identificar que el ejecutador del API hizo halgo incorrectamente. 
+         *      Es comun que en el cuerpo de la respuesta contenga un mensaje de error de ayuda para resolver el problema para que se puede hacer re submit al mismo request.
+         * Server Error 5xx
+         *     500 Internal Server Error, 501 Not Implemented, 503 Service Unavailable (comunmente usado para limitar el numero de request al API). Cualquier request que regrese 500s es usado para identificar un error de servidor y el executador del API debería reintentar el request de nueva cuenta. 
+         *     También es comun para el body de la respuesta contener un mensaje de error de ayuda para identificar cual fue el problema.
+         *     
+        ***/
+
         //GET: api/Autores
         public ResultList<AutorViewModel> Get([FromUri]QueryOptions queryOptions)
         {
@@ -41,22 +58,22 @@ namespace BootstrapExample.Controllers.api
             return new ResultList<AutorViewModel>(AutoMapper.Mapper.Map<List<Autor>, List<AutorViewModel>>(autores.ToList()), queryOptions);
         }
 
-        /*** HTTP Status Codes
-         * aplicaciones RESTful depende mucho de los HTTP Status Codes 
-         * para proveer el feedback del API request. Los tres principales niveles que son comunmente usados son:
-         * Successful 2xx
-         *      200 OK, 201 Created, 204 No Content. Cualquier respuesta 
-         *      con código 200s es usado para identificar que el API request fue correcto
-         * Client Error 400
-         *      400 Bad Request (los datos no son validos), 401 Unauthorized, 404 Not Found, 405 Method Not Allowed. 
-         *      Cualquier respuesta en 400s es usada para identificar que el ejecutador del API hizo halgo incorrectamente. 
-         *      Es comun que en el cuerpo de la respuesta contenga un mensaje de error de ayuda para resolver el problema para que se puede hacer re submit al mismo request.
-         * Server Error 5xx
-         *     500 Internal Server Error, 501 Not Implemented, 503 Service Unavailable (comunmente usado para limitar el numero de request al API). Cualquier request que regrese 500s es usado para identificar un error de servidor y el executador del API debería reintentar el request de nueva cuenta. 
-         *     También es comun para el body de la respuesta contener un mensaje de error de ayuda para identificar cual fue el problema.
-         *     
-        ***/
-        
+        public AutorViewModel Get(int? id)
+        {
+            if(id == null)
+            {
+                return BadRequest("No se ha especificado el id del Autor");
+            }
+
+            Autor autor = db.Autor.Find(id);
+            if(autor == null)
+            {
+                return NotFound();
+            }
+
+            AutoMapper.Mapper.CreateMap<Autor, AutorViewModel>();
+            return autor;
+        }
 
         // PUT: api/autores
         [ResponseType(typeof(void))]
