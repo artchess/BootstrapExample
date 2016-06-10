@@ -15,6 +15,7 @@ namespace BootstrapExample
             // Configuraciones y servicios de Web Api
 
             config.Filters.Add(new ValidationActionFilterAttribute());
+            config.Filters.Add(new OnApiExceptionAttribute());
 
             // rutas de web API
             config.MapHttpAttributeRoutes();

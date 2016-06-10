@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Core;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Dynamic;
@@ -58,21 +59,18 @@ namespace BootstrapExample.Controllers.api
             return new ResultList<AutorViewModel>(AutoMapper.Mapper.Map<List<Autor>, List<AutorViewModel>>(autores.ToList()), queryOptions);
         }
 
+        // Get: api/autores/5
         [ResponseType(typeof(AutorViewModel))]
-        public IHttpActionResult Get(int? id)
+        public IHttpActionResult Get(int id)
         {
-            if(id == null)
-            {
-                return BadRequest("No se ha especificado el id del Autor");
-            }
-
             Autor autor = db.Autor.Find(id);
-            if(autor == null)
+            if (autor == null)
             {
-                return NotFound();
+                throw new ObjectNotFoundException(string.Format("No es posible encontrar el autor con el id {0}", id));
             }
 
             AutoMapper.Mapper.CreateMap<Autor, AutorViewModel>();
+
             return Ok(AutoMapper.Mapper.Map<AutorViewModel>(autor));
         }
 
